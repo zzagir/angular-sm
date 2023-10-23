@@ -1,0 +1,118 @@
+<div class="container">
+  <h4 class="my-2">
+    <mark class="mx-2 rounded-3 bg-warning">Автомобиль: </mark>{{ name }}
+    <small>{{ model }}</small>
+  </h4>
+
+  <div class="alert alert-success my-4">
+    <h4>Характеристики автомобиля:</h4>
+    <ul>
+      <li>
+        Скорость:
+        <strong>{{ speed }} км</strong>
+      </li>
+      <li>
+        Цвет автомобиля:
+        <strong>{{ colors.car }}</strong>
+      </li>
+      <li>
+        Цвет салона:
+        <strong>{{ colors.salon }}</strong>
+      </li>
+      <li>
+        Цвет колес:
+        <strong>{{ colors.wheels }}</strong>
+      </li>
+    </ul>
+  </div>
+
+  <h4>Редактирование автомобиля</h4>
+  <button class="btn btn-danger w-100 mb-2" (click)="showEdit()">
+    Редактировать
+  </button>
+  <form *ngIf="isEdit">
+    <div class="form-group my-2 d-flex flex-column gap-2">
+      <input
+        type="text"
+        placeholder="Название машины"
+        class="form-control"
+        [(ngModel)]="name"
+        name="name"
+      />
+      <input
+        type="text"
+        placeholder="Модель машины"
+        class="form-control"
+        [(ngModel)]="model"
+        name="model"
+      />
+      <input
+        type="text"
+        placeholder="Скорость"
+        class="form-control"
+        [(ngModel)]="speed"
+        name="speed"
+      />
+      <input
+        type="text"
+        placeholder="Цвет машины"
+        class="form-control"
+        [(ngModel)]="colors.car"
+        name="car"
+      />
+      <input
+        type="text"
+        placeholder="Цвет салона"
+        class="form-control"
+        [(ngModel)]="colors.salon"
+        name="salon"
+      />
+      <input
+        type="text"
+        placeholder="Цвет колес"
+        class="form-control"
+        [(ngModel)]="colors.wheels"
+        name="wheels"
+      />
+    </div>
+  </form>
+
+  <h4>Возможности автомобиля</h4>
+  <form (submit)="addOpt(option.value)">
+    <div class="form-group my-2 d-flex flex-column gap-2">
+      <input
+        type="text"
+        name="option"
+        id="option"
+        placeholder="Введите новую возможность"
+        class="form-control"
+        #option
+      />
+      <button type="submit" class="btn btn-outline-success">Добавить</button>
+    </div>
+  </form>
+
+  <div class="alert alert-warning">
+    <ul>
+      <li *ngFor="let opt of options; let i = index">
+        {{ i + 1 }} = {{ opt }}
+        <button
+          class="btn btn-warning btn-sm p-2"
+          style="font-size: 0.8em; line-height: 8px"
+          (click)="deleteOpt(opt)"
+        >
+          x
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <h5>Выберите автомобиль:</h5>
+  <div class="d-flex gap-2">
+    <button class="btn btn-danger" (click)="autoSelect('BMW')">BMW</button>
+    <button class="btn btn-info" (click)="autoSelect('Audi')">Audi</button>
+    <button class="btn btn-success" (click)="autoSelect('Mercedes')">
+      Mercedes
+    </button>
+  </div>
+</div>
